@@ -41,7 +41,7 @@ class Button extends Component {
                 width: "100%",
                 height: "100%",
                 alignSelf: "center",
-                backgroundColor:'#758BFD',
+                backgroundColor:'#85D1EB',
                 color:'white',
             }
         }
@@ -55,7 +55,7 @@ class Button extends Component {
             height: "30%",
             margin: "10px",
             alignSelf: "center",
-            backgroundColor:'red',
+            backgroundColor:'white',
             color:'white',
             textDecoration: 'none',
         }

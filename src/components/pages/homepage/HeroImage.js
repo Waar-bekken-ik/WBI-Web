@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Menu from  './Menu';
+import logo from '../../../images/logo_erasmusmc.png';
+import background from '../../../images/background.png';
+// https://www.egmadviseurs.nl/public/uploads/Advies-Erasmus-MC-Rotterdam-13.jpg
 
 class HeroImage extends Component {
     constructor() {
@@ -12,8 +15,18 @@ class HeroImage extends Component {
     render () {
 
         const bg = {
-          //  backgroundImage: "URL('https://daf9627eib4jq.cloudfront.net/app/uploads/2018/08/1_A99100.24-Passage_Kunst_01%E2%88%8FOssip-1024x768.jpg')",
+            backgroundImage: `URL(${background})`,
             backgroundColor: "#0B2073",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height:"100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+        };
+
+        const menu = {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -30,10 +43,26 @@ class HeroImage extends Component {
             fontFamily: "Arial",
         };
 
+        const logostl= {
+            width:"50vw",
+            alignSelf:"center",
+            height:"auto",
+            marginTop: "10px",
+            backgroundColor: "white",
+            padding:"20px",
+            borderRadius:"20px",
+
+        }
+
         return(
             <div style={bg}>
-              <h1 style={header}>{this.state.title}</h1>
-              <Menu />
+              <img style={logostl} src={logo}/>
+              <div style={menu}>
+                    <h1 style={header}>
+                        {this.state.title}
+                    </h1>
+                    <Menu />
+              </div>
             </div>
         );
     }
