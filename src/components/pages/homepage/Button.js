@@ -23,7 +23,7 @@ class Button extends Component {
         if(this.state.clicked) {
             btn = {
                 fontFamily: "Arial",
-                fontSize: "40px",
+                fontSize: "20px",
                 borderRadius: "20px",
                 border:"none",
                 width: "100%",
@@ -35,7 +35,7 @@ class Button extends Component {
         } else {
             btn = {
                 fontFamily: "Arial",
-                fontSize: "40px",
+                fontSize: "20px",
                 borderRadius: "20px",
                 border: "none",
                 width: "100%",
