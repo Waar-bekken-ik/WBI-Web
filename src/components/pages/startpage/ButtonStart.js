@@ -10,6 +10,11 @@ class ButtonStart extends Component {
         }
     }
 
+    handleClick(){
+        this.setState({clicked: !this.state.clicked});
+    }
+
+
     render() {
       
 
@@ -42,7 +47,7 @@ class ButtonStart extends Component {
 
         const lnk = {
             fontFamily: "Arial",
-            fontSize: "40px",
+            fontSize: "30px",
             borderRadius: "20px",
             border: "none",
             width: "80%",
@@ -52,6 +57,10 @@ class ButtonStart extends Component {
             backgroundColor:'#85D1EB',
             color:'white',
             textDecoration: 'none',
+            textAlign:'center',
+            display:'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
         }
 
     

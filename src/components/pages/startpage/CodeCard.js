@@ -19,7 +19,7 @@ class CodeCard extends Component {
     render(){
 
         const menu = {
-            height: "40vh",
+            height: "50vh",
             width: "70vw",
             alignSelf: "center",
             backgroundColor: "white",
@@ -100,7 +100,7 @@ class CodeCard extends Component {
                 onInput={()=>this.handleClick()}
                
                 ></input>
-                <ButtonStart name="HOI" />
+                <ButtonStart name="Start" value="/" />
             </div>
         )
     }
