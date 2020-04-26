@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import ButtonStart from '../startpage/ButtonStart'
+import ButtonStart from '../startpage/ButtonStart';
+import ButtonBack from '../../navigation/ButtonBack';
+
 
 class CodeCard extends Component {
     constructor() {
@@ -18,9 +20,17 @@ class CodeCard extends Component {
 
     render(){
 
+        const nav = {
+            display:"flex",
+            justifyContent: "flext-start",
+            width: "100%",
+            height: "8vw",
+            flexDirection: 'row',
+        }
+
         const menu = {
-            height: "50vh",
-            width: "70vw",
+            height: "70vh",
+            width: "80vw",
             alignSelf: "center",
             backgroundColor: "white",
             display: "flex",
@@ -29,12 +39,15 @@ class CodeCard extends Component {
             borderRadius: "20px",
             paddingTop: "10px",
             paddingBottom: "10px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
         }
 
         const sbt = {
             fontSize: "8vw",
-            color: "#0B2073",
+            height: "8vw",
             alignSelf: "center",
+            color: "#0B2073",
         }
 
         const sbt_two = {
@@ -44,6 +57,7 @@ class CodeCard extends Component {
             marginTop: "0px",
             display: 'flex',
             textAlign: 'center',
+            width: '80%',
 
         }
 
@@ -53,7 +67,8 @@ class CodeCard extends Component {
             display:"flex",
             justifyContent: "center",
             flexDirection: "column",
-            flexWrap: "wrap",
+            width: "100%",
+        
         }
 
         var code_bar;
@@ -74,7 +89,7 @@ class CodeCard extends Component {
     } else {
         code_bar = {
             fontSize: "50px",
-            height:"30%",
+            height:"20%",
             width: "80%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 15px #85D1EB",
@@ -86,10 +101,23 @@ class CodeCard extends Component {
         }
     }
 
+    const hint = {
+        fontSize: "3vw",
+        color: "#0B2073",
+        alignSelf: "center",
+        marginBottom: "0px",
+        display: 'flex',
+        textAlign: 'center',
+
+    }
+
 
         return(
             <div style={menu}>
                 <div style={sbt_div}>
+                    <div style={nav}>
+                        <ButtonBack />
+                    </div>
                     <h1 style={sbt}>{this.state.subtitle}</h1>
                     <h2 style={sbt_two}>{this.state.subtitle_two}</h2>
                 </div>
@@ -100,8 +128,10 @@ class CodeCard extends Component {
                 onInput={()=>this.handleClick()}
                
                 ></input>
-                <ButtonStart name="Start" value="/" />
+                <ButtonStart name="Deelnemen" value="/" />
+                <p style={hint}>Tip: de code staat op het beeldscherm.</p>
             </div>
+
         )
     }
 }

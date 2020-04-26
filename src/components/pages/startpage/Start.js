@@ -69,7 +69,6 @@ class Start extends Component {
         return(
             <div style={bg}>
                 {/* <ButtonBack/> */}
-              <img style={logostl} src={logo}/>
               <div style={menu}>
                     <h1 style={header}>
                         {/* {this.state.title} */}

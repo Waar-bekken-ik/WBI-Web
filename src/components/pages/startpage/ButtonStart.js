@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link } from "react-router-dom";
 
 
+
 class ButtonStart extends Component {
     constructor() {
         super();
@@ -51,7 +52,7 @@ class ButtonStart extends Component {
             borderRadius: "20px",
             border: "none",
             width: "80%",
-            height: "30%",
+            height: "20%",
             margin: "10px",
             alignSelf: "center",
             backgroundColor:'#85D1EB',
@@ -61,6 +62,9 @@ class ButtonStart extends Component {
             display:'flex',
             justifyContent: 'center',
             flexDirection: 'column',
+            paddingLeft:"10px",
+            paddingRight:"10px",
+            marginTop: "20px",
         }
 
     
@@ -71,7 +75,8 @@ class ButtonStart extends Component {
         
                 {this.props.name}
          
-            </Link>
+            </Link> 
+
         )
     }
 }
