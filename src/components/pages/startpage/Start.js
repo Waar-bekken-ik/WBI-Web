@@ -52,7 +52,7 @@ class Start extends Component {
             fontSize: "40px",
             color: "#FFFFFF",
             alignSelf: "center",
-            fontFamily: "Arial",
+            fontFamily: "Montserrat",
         };
 
         const logostl= {
@@ -68,7 +68,6 @@ class Start extends Component {
 
         return(
             <div style={bg}>
-                {/* <ButtonBack/> */}
               <div style={menu}>
                     <h1 style={header}>
                         {/* {this.state.title} */}

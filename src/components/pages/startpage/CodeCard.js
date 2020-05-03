@@ -48,6 +48,7 @@ class CodeCard extends Component {
             height: "8vw",
             alignSelf: "center",
             color: "#0B2073",
+            fontFamily: "Montserrat",
         }
 
         const sbt_two = {
@@ -58,6 +59,7 @@ class CodeCard extends Component {
             display: 'flex',
             textAlign: 'center',
             width: '80%',
+            fontFamily: "Montserrat",
 
         }
 
@@ -108,6 +110,7 @@ class CodeCard extends Component {
         marginBottom: "0px",
         display: 'flex',
         textAlign: 'center',
+        fontFamily: "Montserrat",
 
     }
 
@@ -116,7 +119,7 @@ class CodeCard extends Component {
             <div style={menu}>
                 <div style={sbt_div}>
                     <div style={nav}>
-                        <ButtonBack />
+                        <ButtonBack value="/" />
                     </div>
                     <h1 style={sbt}>{this.state.subtitle}</h1>
                     <h2 style={sbt_two}>{this.state.subtitle_two}</h2>

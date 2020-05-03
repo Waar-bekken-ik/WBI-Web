@@ -3,8 +3,8 @@ import back_icon from "../../images/back_icon.png";
 import { Link } from "react-router-dom";
 
 class ButtonBack extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
 
@@ -18,7 +18,7 @@ class ButtonBack extends Component {
 
         return(
             <div>
-                <Link>
+                <Link to = {this.props.value}>
                     <img style={bi_style} src={back_icon}></img>
                 </Link>
             </div>

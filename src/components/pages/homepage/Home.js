@@ -48,7 +48,7 @@ class HeroImage extends Component {
             fontSize: "40px",
             color: "#FFFFFF",
             alignSelf: "center",
-            fontFamily: "Arial",
+            fontFamily: "Montserrat",
         };
 
         const logostl= {

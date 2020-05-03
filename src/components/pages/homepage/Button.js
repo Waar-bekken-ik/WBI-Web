@@ -22,7 +22,7 @@ class Button extends Component {
         var btn;
         if(this.state.clicked) {
             btn = {
-                fontFamily: "Arial",
+                fontFamily: "Montserrat",
                 fontSize: "20px",
                 borderRadius: "20px",
                 border:"none",
@@ -34,7 +34,7 @@ class Button extends Component {
             }
         } else {
             btn = {
-                fontFamily: "Arial",
+                fontFamily: "Montserrat",
                 fontSize: "20px",
                 borderRadius: "20px",
                 border: "none",
@@ -47,7 +47,7 @@ class Button extends Component {
         }
 
         const lnk = {
-            fontFamily: "Arial",
+            fontFamily: "Montserrat",
             fontSize: "40px",
             borderRadius: "20px",
             border: "none",
