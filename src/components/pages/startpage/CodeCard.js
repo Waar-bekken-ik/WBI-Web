@@ -1,24 +1,18 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
 
+function CodeCard() {
 
-class CodeCard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            subtitle: "Voer de code in",
-            subtitle_two: "om aan de sessie deel te nemen.",
-            info: "Tip: de code is de vinden bovenin het scherm.",
-            clicked: false,
-        }
+    const subtitle = "Voer de code in"
+    const subtitle_two = "om aan de sessie deel te nemen"
+    const info = "Tip: de code staat op het beeldscherm."
+    const [clicked, setClicked] = useState(false)
+
+    const handleClick = () => {
+        setClicked(true)
     }
 
-    handleClick() {
-        this.setState({clicked: true})
-    }
-
-    render(){
         const nav = {
             display:"flex",
             justifyContent: "flext-start",
@@ -72,10 +66,10 @@ class CodeCard extends Component {
 
         var code_bar;
         
-        if (this.state.clicked) {
+        if (clicked) {
         code_bar = {
             fontSize: "50px",
-            height:"30%",
+            height:"20%",
             width: "80%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 0px black",
@@ -116,20 +110,20 @@ class CodeCard extends Component {
                     <div style={nav}>
                         <ButtonBack value="/" />
                     </div>
-                    <h1 style={sbt}>{this.state.subtitle}</h1>
-                    <h2 style={sbt_two}>{this.state.subtitle_two}</h2>
+                    <h1 style={sbt}>{subtitle}</h1>
+                    <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
 
                 <input 
                 style={code_bar} 
                 type="text" 
-                onInput={()=>this.handleClick()}
+                onInput={()=>handleClick()}
                 ></input>
                 <ButtonStart name="Deelnemen" value="/" />
-                <p style={hint}>Tip: de code staat op het beeldscherm.</p>
+                <p style={hint}>{info}</p>
             </div>
         )
-    }
+    
 }
 
 export default CodeCard;

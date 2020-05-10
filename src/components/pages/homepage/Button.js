@@ -1,22 +1,15 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {Link } from "react-router-dom";
 
-class Button extends Component {
-    constructor(props) {
-        super(props)
+function Button(props){
+    const [clicked, setClicked] = useState(false);
+    const handleClick = () => {
+        console.log("clicked");
+        setClicked(!clicked)
+    };
 
-        this.state = {
-            clicked: false,
-        };
-    }
-
-    handleClick(){
-        this.setState({clicked: !this.state.clicked});
-    }
-
-    render() {
         var btn;
-        if(this.state.clicked) {
+        if(clicked) {
             btn = {
                 fontFamily: "Montserrat",
                 fontSize: "20px",
@@ -28,6 +21,7 @@ class Button extends Component {
                 backgroundColor:'#AEB8FE',
                 color:'white',
             }
+            console.log("true")
         } else {
             btn = {
                 fontFamily: "Montserrat",
@@ -40,6 +34,7 @@ class Button extends Component {
                 backgroundColor:'#85D1EB',
                 color:'white',
             }
+            console.log("false")
         }
 
         const lnk = {
@@ -57,16 +52,15 @@ class Button extends Component {
         }
 
         return(
-            <Link to = {this.props.value} onClick = {()=> this.handleClick()}
+            <Link to = {props.value} onClick = {()=> handleClick()}
             style={lnk} >
             <button 
-            onClick = {()=> this.handleClick()}
+            onClick = {()=> handleClick()}
             style={btn} >
-                {this.props.name}
+                {props.name}
             </button>
             </Link>
         )
-    }
 }
 
 export default Button;

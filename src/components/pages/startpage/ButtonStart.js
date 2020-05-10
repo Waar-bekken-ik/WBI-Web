@@ -1,21 +1,14 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {Link } from "react-router-dom";
 
+function ButtonStart(props) {
 
-
-class ButtonStart extends Component {
-    constructor() {
-        super();
-        this.state = {
-            clicked: false,
-        }
-    }
-
-    handleClick(){
-        this.setState({clicked: !this.state.clicked});
-    }
-
-    render() {
+    const [clicked, setClicked] = useState(false);
+    const handleClick = () => {
+        console.log("clicked");
+        setClicked(!clicked)
+    };
+    
         const lnk = {
             fontFamily: "Montserrat",
             fontSize: "30px",
@@ -38,15 +31,11 @@ class ButtonStart extends Component {
         }
 
         return(
-            <Link to = {this.props.value} onClick = {()=> this.handleClick()}
+            <Link to = {props.value} onClick = {()=> handleClick()}
             style={lnk} >
-        
-                {this.props.name}
-         
+                {props.name}
             </Link> 
-
         )
-    }
 }
 
 export default ButtonStart;
