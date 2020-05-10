@@ -3,9 +3,9 @@ import Button from './Button';
 
 
 class Menu extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     render() {
         const menu = {
@@ -22,9 +22,7 @@ class Menu extends Component {
         }
         return(
             <div style={menu}>
-             
-                        <Button name="Start" value="/start"/>
-                
+                <Button name="Start" value="/start"/>
                 <Button name="Opties" value="/"/>
                 <Button name="Doei" value="/"/>
             </div>

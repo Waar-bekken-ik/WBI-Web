@@ -1,9 +1,6 @@
 import React, {Component} from "react";
 import CodeCard from './CodeCard';
-
-import logo from '../../../images/logo_erasmusmc.png';
 import background from '../../../images/background.png';
-import ButtonBack from "../../navigation/ButtonBack";
 // https://www.egmadviseurs.nl/public/uploads/Advies-Erasmus-MC-Rotterdam-13.jpg
 
 
@@ -15,13 +12,9 @@ class Start extends Component {
             subtitle: "Voer de code in.",
         };
     }
-
-
     
     render () {
-        
         var vh = window.innerHeight * 0.01;
-
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
         const bg = {
@@ -30,7 +23,6 @@ class Start extends Component {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            height: "100vh",
             height:"calc(var(--vh, 1vh)*100)",
             // ^^ for mobile browsers
             display: "flex",
@@ -54,17 +46,6 @@ class Start extends Component {
             alignSelf: "center",
             fontFamily: "Montserrat",
         };
-
-        const logostl= {
-            width:"50vw",
-            alignSelf:"center",
-            height:"auto",
-            marginTop: "10px",
-            backgroundColor: "white",
-            padding:"20px",
-            borderRadius:"20px",
-
-        }
 
         return(
             <div style={bg}>

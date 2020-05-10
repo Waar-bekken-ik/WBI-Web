@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
 import {Link } from "react-router-dom";
 
 class Button extends Component {
@@ -11,14 +10,11 @@ class Button extends Component {
         };
     }
 
-        
     handleClick(){
         this.setState({clicked: !this.state.clicked});
     }
 
     render() {
-      
-
         var btn;
         if(this.state.clicked) {
             btn = {
@@ -59,8 +55,6 @@ class Button extends Component {
             color:'white',
             textDecoration: 'none',
         }
-
-    
 
         return(
             <Link to = {this.props.value} onClick = {()=> this.handleClick()}

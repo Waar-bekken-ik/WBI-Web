@@ -15,37 +15,7 @@ class ButtonStart extends Component {
         this.setState({clicked: !this.state.clicked});
     }
 
-
     render() {
-      
-
-        var btn;
-        if(this.state.clicked) {
-            btn = {
-                fontFamily: "Montserrat",
-                fontSize: "20px",
-                borderRadius: "20px",
-                border:"none",
-                width: "100%",
-                height: "100%",
-                alignSelf: "center",
-                backgroundColor:'#AEB8FE',
-                color:'white',
-            }
-        } else {
-            btn = {
-                fontFamily: "Montserrat",
-                fontSize: "20px",
-                borderRadius: "20px",
-                border: "none",
-                width: "100%",
-                height: "100%",
-                alignSelf: "center",
-                backgroundColor:'#85D1EB',
-                color:'white',
-            }
-        }
-
         const lnk = {
             fontFamily: "Montserrat",
             fontSize: "30px",
@@ -66,8 +36,6 @@ class ButtonStart extends Component {
             paddingRight:"10px",
             marginTop: "20px",
         }
-
-    
 
         return(
             <Link to = {this.props.value} onClick = {()=> this.handleClick()}

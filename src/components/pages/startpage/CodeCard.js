@@ -19,7 +19,6 @@ class CodeCard extends Component {
     }
 
     render(){
-
         const nav = {
             display:"flex",
             justifyContent: "flext-start",
@@ -60,7 +59,6 @@ class CodeCard extends Component {
             textAlign: 'center',
             width: '80%',
             fontFamily: "Montserrat",
-
         }
 
         const sbt_div = {
@@ -70,7 +68,6 @@ class CodeCard extends Component {
             justifyContent: "center",
             flexDirection: "column",
             width: "100%",
-        
         }
 
         var code_bar;
@@ -88,7 +85,7 @@ class CodeCard extends Component {
             paddingRight:"10px",
             textAlign:"center",
         }
-    } else {
+        } else {
         code_bar = {
             fontSize: "50px",
             height:"20%",
@@ -101,19 +98,17 @@ class CodeCard extends Component {
             paddingRight:"10px",
             textAlign:"center",
         }
-    }
+        }
 
-    const hint = {
-        fontSize: "3vw",
-        color: "#0B2073",
-        alignSelf: "center",
-        marginBottom: "0px",
-        display: 'flex',
-        textAlign: 'center',
-        fontFamily: "Montserrat",
-
-    }
-
+        const hint = {
+            fontSize: "3vw",
+            color: "#0B2073",
+            alignSelf: "center",
+            marginBottom: "0px",
+            display: 'flex',
+            textAlign: 'center',
+            fontFamily: "Montserrat",
+        }
 
         return(
             <div style={menu}>
@@ -129,12 +124,10 @@ class CodeCard extends Component {
                 style={code_bar} 
                 type="text" 
                 onInput={()=>this.handleClick()}
-               
                 ></input>
                 <ButtonStart name="Deelnemen" value="/" />
                 <p style={hint}>Tip: de code staat op het beeldscherm.</p>
             </div>
-
         )
     }
 }
