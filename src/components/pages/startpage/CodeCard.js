@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
+import {useForm} from "react-hook-form";
 
 function CodeCard() {
 
@@ -8,9 +9,15 @@ function CodeCard() {
     const subtitle_two = "om aan de sessie deel te nemen"
     const info = "Tip: de code staat op het beeldscherm."
     const [clicked, setClicked] = useState(false)
+    const {register, handleSubmit} = useForm();
 
     const handleClick = () => {
         setClicked(true)
+    }
+
+    const onSubmit = data => {
+        console.log(data);
+        alert("Je hebt " + data.roompin + " ingevoerd.")
     }
 
         const nav = {
@@ -64,32 +71,43 @@ function CodeCard() {
             width: "100%",
         }
 
+        const form = {
+            height:"50%",
+            width: "80%",
+            fontSize: "50px",
+            alignSelf: "center",
+            textAlign:"center",
+            justifyContent: "center",
+            display:"flex",
+            flexDirection: "column",
+        }
+
         var code_bar;
         
         if (clicked) {
         code_bar = {
             fontSize: "50px",
-            height:"20%",
-            width: "80%",
+            height:"50%",
+            width: "100%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 0px black",
             color: "#0B2073",
             alignSelf: "center",
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            paddingLeft:"0px",
+            paddingRight:"0px",
             textAlign:"center",
         }
         } else {
         code_bar = {
             fontSize: "50px",
-            height:"20%",
-            width: "80%",
+            height:"50%",
+            width: "100%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 15px #85D1EB",
             color: "#0B2073",
             alignSelf: "center",
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            paddingLeft:"0px",
+            paddingRight:"0px",
             textAlign:"center",
         }
         }
@@ -103,6 +121,7 @@ function CodeCard() {
             textAlign: 'center',
             fontFamily: "Montserrat",
         }
+  
 
         return(
             <div style={menu}>
@@ -114,12 +133,18 @@ function CodeCard() {
                     <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
 
-                <input 
-                style={code_bar} 
-                type="text" 
-                onInput={()=>handleClick()}
-                ></input>
-                <ButtonStart name="Deelnemen" value="/" />
+                <form style={form} onSubmit={handleSubmit(onSubmit)}>
+                    <input 
+                        style={code_bar} 
+                        type="text" 
+                        onInput={()=>handleClick()}
+                        ref={register}
+                        name="roompin"
+                    />
+
+                  <ButtonStart name="Deelnemen"/>
+                </form>
+            
                 <p style={hint}>{info}</p>
             </div>
         )

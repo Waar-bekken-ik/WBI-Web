@@ -4,7 +4,6 @@ import {Link } from "react-router-dom";
 function Button(props){
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
-        console.log("clicked");
         setClicked(!clicked)
     };
 
@@ -21,7 +20,6 @@ function Button(props){
                 backgroundColor:'#AEB8FE',
                 color:'white',
             }
-            console.log("true")
         } else {
             btn = {
                 fontFamily: "Montserrat",
@@ -34,7 +32,6 @@ function Button(props){
                 backgroundColor:'#85D1EB',
                 color:'white',
             }
-            console.log("false")
         }
 
         const lnk = {
