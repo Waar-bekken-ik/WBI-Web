@@ -1,26 +1,14 @@
-import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {useState} from 'react';
 import {Link } from "react-router-dom";
 
-class Button extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            clicked: false,
-        };
-    }
-
-        
-    handleClick(){
-        this.setState({clicked: !this.state.clicked});
-    }
-
-    render() {
-      
+function Button({value, name}){
+    const [clicked, setClicked] = useState(false);
+    const handleClick = () => {
+        setClicked(!clicked)
+    };
 
         var btn;
-        if(this.state.clicked) {
+        if(clicked) {
             btn = {
                 fontFamily: "Montserrat",
                 fontSize: "20px",
@@ -60,19 +48,16 @@ class Button extends Component {
             textDecoration: 'none',
         }
 
-    
-
         return(
-            <Link to = {this.props.value} onClick = {()=> this.handleClick()}
+            <Link to = {value} onClick = {()=> handleClick()}
             style={lnk} >
             <button 
-            onClick = {()=> this.handleClick()}
+            onClick = {()=> handleClick()}
             style={btn} >
-                {this.props.name}
+                {name}
             </button>
             </Link>
         )
-    }
 }
 
 export default Button;

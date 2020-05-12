@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
+import {useForm} from "react-hook-form";
 
+function CodeCard() {
 
-class CodeCard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            subtitle: "Voer de code in",
-            subtitle_two: "om aan de sessie deel te nemen.",
-            info: "Tip: de code is de vinden bovenin het scherm.",
-            clicked: false,
-        }
+    const subtitle = "Voer de code in"
+    const subtitle_two = "om aan de sessie deel te nemen"
+    const info = "Tip: de code staat op het beeldscherm."
+    const [clicked, setClicked] = useState(false)
+    const {register, handleSubmit} = useForm();
+
+    const handleClick = () => {
+        setClicked(true)
     }
 
-    handleClick() {
-        this.setState({clicked: true})
+    const onSubmit = data => {
+        console.log(data);
+        alert("Je hebt " + data.roompin + " ingevoerd.")
     }
-
-    render(){
 
         const nav = {
             display:"flex",
@@ -60,7 +60,6 @@ class CodeCard extends Component {
             textAlign: 'center',
             width: '80%',
             fontFamily: "Montserrat",
-
         }
 
         const sbt_div = {
@@ -70,50 +69,59 @@ class CodeCard extends Component {
             justifyContent: "center",
             flexDirection: "column",
             width: "100%",
-        
+        }
+
+        const form = {
+            height:"50%",
+            width: "80%",
+            fontSize: "50px",
+            alignSelf: "center",
+            textAlign:"center",
+            justifyContent: "center",
+            display:"flex",
+            flexDirection: "column",
         }
 
         var code_bar;
         
-        if (this.state.clicked) {
+        if (clicked) {
         code_bar = {
             fontSize: "50px",
-            height:"30%",
-            width: "80%",
+            height:"50%",
+            width: "100%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 0px black",
             color: "#0B2073",
             alignSelf: "center",
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            paddingLeft:"0px",
+            paddingRight:"0px",
             textAlign:"center",
         }
-    } else {
+        } else {
         code_bar = {
             fontSize: "50px",
-            height:"20%",
-            width: "80%",
+            height:"50%",
+            width: "100%",
             border: "2px solid #0B2073",
             boxShadow: "0px 0px 15px #85D1EB",
             color: "#0B2073",
             alignSelf: "center",
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            paddingLeft:"0px",
+            paddingRight:"0px",
             textAlign:"center",
         }
-    }
+        }
 
-    const hint = {
-        fontSize: "3vw",
-        color: "#0B2073",
-        alignSelf: "center",
-        marginBottom: "0px",
-        display: 'flex',
-        textAlign: 'center',
-        fontFamily: "Montserrat",
-
-    }
-
+        const hint = {
+            fontSize: "3vw",
+            color: "#0B2073",
+            alignSelf: "center",
+            marginBottom: "0px",
+            display: 'flex',
+            textAlign: 'center',
+            fontFamily: "Montserrat",
+        }
+  
 
         return(
             <div style={menu}>
@@ -121,22 +129,25 @@ class CodeCard extends Component {
                     <div style={nav}>
                         <ButtonBack value="/" />
                     </div>
-                    <h1 style={sbt}>{this.state.subtitle}</h1>
-                    <h2 style={sbt_two}>{this.state.subtitle_two}</h2>
+                    <h1 style={sbt}>{subtitle}</h1>
+                    <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
 
-                <input 
-                style={code_bar} 
-                type="text" 
-                onInput={()=>this.handleClick()}
-               
-                ></input>
-                <ButtonStart name="Deelnemen" value="/" />
-                <p style={hint}>Tip: de code staat op het beeldscherm.</p>
-            </div>
+                <form style={form} onSubmit={handleSubmit(onSubmit)}>
+                    <input 
+                        style={code_bar} 
+                        type="text" 
+                        onInput={()=>handleClick()}
+                        ref={register}
+                        name="roompin"
+                    />
 
+                  <ButtonStart name="Deelnemen"/>
+                </form>
+            
+                <p style={hint}>{info}</p>
+            </div>
         )
-    }
 }
 
 export default CodeCard;

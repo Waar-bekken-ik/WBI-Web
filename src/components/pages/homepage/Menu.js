@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from './Button';
 
-
-class Menu extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
+function Menu() {
+   
         const menu = {
             height: "40vh",
             width: "70vw",
@@ -22,14 +17,11 @@ class Menu extends Component {
         }
         return(
             <div style={menu}>
-             
-                        <Button name="Start" value="/start"/>
-                
+                <Button name="Start" value="/start"/>
                 <Button name="Opties" value="/"/>
                 <Button name="Doei" value="/"/>
             </div>
         )
-    }
 }
 
 export default Menu;

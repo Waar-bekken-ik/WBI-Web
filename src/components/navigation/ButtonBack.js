@@ -1,29 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import back_icon from "../../images/back_icon.png";
 import { Link } from "react-router-dom";
 
-class ButtonBack extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
-
-    render() {
-
+function ButtonBack({value}) {
         const bi_style = {
             height: "8vw",
         }
 
-
         return(
             <div>
-                <Link to = {this.props.value}>
-                    <img style={bi_style} src={back_icon}></img>
+                <Link to = {value}>
+                    <img alt="Back button" style={bi_style} src={back_icon}></img>
                 </Link>
             </div>
         )
     }
-}
 
 export default ButtonBack;
