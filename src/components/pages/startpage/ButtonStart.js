@@ -1,7 +1,7 @@
 import React from "react";
 // import {Link } from "react-router-dom";
 
-function ButtonStart(props) {
+function ButtonStart({name}) {
 
     const lnk = {
         fontFamily: "Montserrat",
@@ -22,14 +22,7 @@ function ButtonStart(props) {
     }
 
         return(
-            // <Link to = "props.value" type="submit" onClick = {()=> handleClick()}
-            // style={lnk} >
-            //     {props.name}
-            // </Link> 
-
-            // <button style={lnk}>{props.name}</button>
-
-            <input type="submit" style={lnk} value={props.name}/>
+            <button style={lnk}>{name}</button>
         )
 }
 

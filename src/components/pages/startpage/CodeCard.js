@@ -148,7 +148,6 @@ function CodeCard() {
                 <p style={hint}>{info}</p>
             </div>
         )
-    
 }
 
 export default CodeCard;

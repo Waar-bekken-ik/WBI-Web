@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link } from "react-router-dom";
 
-function Button(props){
+function Button({value, name}){
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         setClicked(!clicked)
@@ -49,12 +49,12 @@ function Button(props){
         }
 
         return(
-            <Link to = {props.value} onClick = {()=> handleClick()}
+            <Link to = {value} onClick = {()=> handleClick()}
             style={lnk} >
             <button 
             onClick = {()=> handleClick()}
             style={btn} >
-                {props.name}
+                {name}
             </button>
             </Link>
         )
