@@ -12,24 +12,24 @@ function Button({value, name}){
             btn = {
                 fontFamily: "Montserrat",
                 fontSize: "20px",
-                borderRadius: "20px",
+                borderRadius: "10px",
                 border:"none",
                 width: "100%",
                 height: "100%",
                 alignSelf: "center",
-                backgroundColor:'#AEB8FE',
+                backgroundColor:'#314C8C',
                 color:'white',
             }
         } else {
             btn = {
                 fontFamily: "Montserrat",
                 fontSize: "20px",
-                borderRadius: "20px",
+                borderRadius: "10px",
                 border: "none",
                 width: "100%",
                 height: "100%",
                 alignSelf: "center",
-                backgroundColor:'#85D1EB',
+                backgroundColor:'#0C2074',
                 color:'white',
             }
         }
@@ -49,7 +49,7 @@ function Button({value, name}){
         }
 
         return(
-            <Link to = {value} onClick = {()=> handleClick()}
+            <Link to = {value} onMouseDown = {()=> handleClick()} onTouchStart = {()=> handleClick()}
             style={lnk} >
             <button 
             onClick = {()=> handleClick()}

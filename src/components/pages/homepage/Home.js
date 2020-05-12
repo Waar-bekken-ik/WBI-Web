@@ -44,7 +44,7 @@ function HeroImage() {
             marginTop: "10px",
             backgroundColor: "white",
             padding:"20px",
-            borderRadius:"20px",
+            borderRadius: "10px",
         }
 
         return(
