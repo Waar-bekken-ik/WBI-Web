@@ -4,21 +4,19 @@ import ButtonBack from '../../navigation/ButtonBack';
 import {useForm} from "react-hook-form";
 import TextBox from "../startpage/TextBox";
 
-function Start(){
+function Start({history}){
     
         var vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         const subtitle = "Voer de code in"
         const subtitle_two = "om aan de sessie deel te nemen"
         const info = "Tip: de code staat op het beeldscherm."
-       
         const {register, handleSubmit} = useForm();
-    
 
-    
         const onSubmit = data => {
             console.log(data);
             alert(data.name + " heeft " + data.room_pin + " ingevoerd.")
+            history.push('/lobby'); 
         }
 
         const bg = {
@@ -41,24 +39,13 @@ function Start(){
             flexDirection: "column",
         };
 
-        const header = {
-            fontSize: "40px",
-            color: "#505050",
-            alignSelf: "center",
-            fontFamily: "Montserrat",
-        };
-        
-
         const nav = {
             display:"flex",
             justifyContent: "flext-start",
             width: "100%",
             height: "8vw",
             flexDirection: 'row',
-            marginTop: "-4vh",
-         
         }
-
 
         const sbt = {
             fontSize: "8vw",
@@ -98,9 +85,7 @@ function Start(){
             display:"flex",
             flexDirection: "column",
             fontFamily: "Montserrat",
-        }
-
-  
+        }  
 
         const hint = {
             fontSize: "3vw",
@@ -112,11 +97,8 @@ function Start(){
             fontFamily: "Montserrat",
         }
   
-
         return(
             <div style={bg}>
-                    <h1 style={header}>
-                    </h1>
                 <div style={menu}>
                     <div style={sbt_div}>
                         <div style={nav}>

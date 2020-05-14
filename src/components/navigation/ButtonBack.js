@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 function ButtonBack({value}) {
         const bi_style = {
             height: "8vw",
+            marginLeft: "10px",
+            marginTop: "15px",
+         
         }
 
         return(
