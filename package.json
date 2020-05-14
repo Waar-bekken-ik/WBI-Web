@@ -12,6 +12,7 @@
     "react-hook-form": "^5.6.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-spring": "npm:@react-spring/web@^9.0.0-rc.1",
     "zustand": "^2.2.3"
   },
   "scripts": {

@@ -6,7 +6,7 @@ export const [useStore] = create(set => ({
         cluster: process.env.REACT_APP_CLUSTER,
     }),
     gamePhase: undefined,
-    possibleAnswers: undefined,
+    possibleAnswers: ['okee', 'okee2'],
     game: undefined,
     setPossibleAnswers: array => {
         set({ possibleAnswers: array })

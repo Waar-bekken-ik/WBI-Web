@@ -1,5 +1,6 @@
 import React from 'react'
 import { useStore } from '../../../store';
+import { useTrail, a } from 'react-spring';
 
 const Game = () => {
     const { possibleAnswers } = useStore();
@@ -32,29 +33,40 @@ const Game = () => {
         fontFamily: "Montserrat",
     };
 
-    const answer_container = {
+    const answer_text = {
+        color: "#fff",
+        fontSize: 15,
+        fontFamily: "Montserrat",
+    };
+
+    const config = { mass: 5, tension: 2000, friction: 200 }
+
+
+    const trailContainer = useTrail(possibleAnswers.length, {
+        config,
+        border: 'none',
+        textDecoration: 'none',
         alignSelf: "center",
         width: "60%",
         backgroundColor: "#0C2074",
         padding: 20,
         borderRadius: "10px",
-    };
-
-    const answer_text = {
-        color: "#fff",
-    };
+        opacity: 1,
+        x: 0,
+        delay: 500,
+        marginBottom: 20,
+        from: { opacity: 0, x: 20, height: 0 },
+    })
 
     return (
         <div style={bg}>
             <p style={seconds}>14 sec.</p>
-            <p style={header}>Beantwoord de vraag</p>
-            {possibleAnswers && possibleAnswers.map(answer => {
-                return (
-                    <div style={answer_container}>
-                        <p style={answer_text}>{answer}</p>
-                    </div>
-                )
-            })}
+            <p style={header}>Geef het juiste antwoord</p>
+            {trailContainer.map(({ x, height, ...rest }, index) => (
+                <a.button style={{ ...rest, transform: x.interpolate(x => `translate3d(0,${x}px,0)`) }}>
+                    <p style={answer_text}>{possibleAnswers[index]}</p>
+                </a.button>
+            ))}
         </div>
     )
 }
