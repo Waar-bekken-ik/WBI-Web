@@ -1,19 +1,19 @@
 import React from "react";
 import back_icon from "../../images/back_icon.png";
-import { Link } from "react-router-dom";
+import { useStore } from "../../store";
 
-function ButtonBack({value}) {
-        const bi_style = {
-            height: "8vw",
-        }
+function ButtonBack({ value }) {
+    const { setGamePhase } = useStore();
 
-        return(
-            <div>
-                <Link to = {value}>
-                    <img alt="Back button" style={bi_style} src={back_icon}></img>
-                </Link>
-            </div>
-        )
+    const bi_style = {
+        height: "8vw",
     }
+
+    return (
+        <div>
+            <img onClick={() => setGamePhase(value)} alt="Back button" style={bi_style} src={back_icon}></img>
+        </div>
+    )
+}
 
 export default ButtonBack;

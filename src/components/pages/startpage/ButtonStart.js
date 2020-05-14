@@ -1,7 +1,6 @@
-import React, {useState} from "react";
-// import {Link } from "react-router-dom";
+import React, { useState } from "react";
 
-function ButtonStart({name}) {
+function ButtonStart({ name }) {
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         setClicked(!clicked)
@@ -9,7 +8,7 @@ function ButtonStart({name}) {
 
     var lnk;
 
-    if(clicked) {
+    if (clicked) {
         lnk = {
             fontFamily: "Montserrat",
             fontSize: "20px",
@@ -19,12 +18,12 @@ function ButtonStart({name}) {
             height: "20%",
             margin: "10px",
             alignSelf: "center",
-            backgroundColor:'#314C8C',
-            color:'white',
+            backgroundColor: '#314C8C',
+            color: 'white',
             textDecoration: 'none',
-            textAlign:'center',
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            textAlign: 'center',
+            paddingLeft: "10px",
+            paddingRight: "10px",
             marginTop: "20px",
         }
     } else {
@@ -37,21 +36,21 @@ function ButtonStart({name}) {
             height: "20%",
             margin: "10px",
             alignSelf: "center",
-            backgroundColor:'#0C2074',
-            color:'white',
+            backgroundColor: '#0C2074',
+            color: 'white',
             textDecoration: 'none',
-            textAlign:'center',
-            paddingLeft:"10px",
-            paddingRight:"10px",
+            textAlign: 'center',
+            paddingLeft: "10px",
+            paddingRight: "10px",
             marginTop: "20px",
         }
     }
-    
-        return(
-            <button style={lnk} onMouseDown = {()=> handleClick()} onTouchStart = {()=> handleClick()}>
-                {name}
-            </button>
-        )
+
+    return (
+        <button style={lnk} onMouseDown={() => handleClick()} onTouchStart={() => handleClick()}>
+            {name}
+        </button>
+    )
 }
 
 export default ButtonStart;
