@@ -3,6 +3,7 @@ import ButtonBack from '../../navigation/ButtonBack';
 import user_icon from "../../../images/user.png";
 import arrow_icon from "../../../images/arrows.png";
 import time_icon from "../../../images/interface.png";
+import InfoCard from "../lobbypage/InfoCard";
 
 function Lobby() {
     
@@ -44,7 +45,6 @@ function Lobby() {
         flexDirection: 'row',     
     }
 
-
     const sbt = {
         fontSize: "8vw",
         height: "8vw",
@@ -84,37 +84,6 @@ function Lobby() {
         fontFamily: "Montserrat",
     }
 
-    const info_card = {
-        fontSize: "20px",
-        height:"20%",
-        width: "100%",
-        border: "2px solid #CECECE",
-        borderRadius: "10px",
-        color: "#0B2073",
-        alignSelf: "center",
-        paddingLeft:"0px",
-        paddingRight:"0px",
-        textAlign:"center",
-        margin:"10px",
-        fontFamily: "Montserrat",
-        display:"flex",
-        justifyContent: "flex-start",
-        backgroundColor: "white",
-    }
-
-    const icon = {
-        height: "70%",
-        alignSelf: "center",
-        color: "red",
-        marginLeft: "5%",
-    }
-
-    const info = {
-        fontFamily: "Montserrat",
-        alignSelf: "center",
-        marginLeft: "5%",
-    }
-
     return(
         <div style={bg}>
             <div style={menu}>
@@ -126,18 +95,9 @@ function Lobby() {
                     <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
                 <div style={info_section}>
-                    <div style={info_card}>
-                        <img style={icon} src={user_icon}></img>
-                        <p style={info}>{player_count} / {player_total}</p>
-                    </div>
-                    <div style={info_card}>
-                        <img style={icon} src={arrow_icon}></img>
-                        <p style={info}>{rounds} ronde(s)</p>
-                    </div>
-                    <div style={info_card}>
-                        <img style={icon} src={time_icon}></img>
-                        <p style={info}>{time} {time_unit} / ronde</p>
-                    </div>
+                    <InfoCard card_src={user_icon} text={`${player_count} / ${player_total}`}/>
+                    <InfoCard card_src={arrow_icon} text={`${rounds} ronde(s)`}/>
+                    <InfoCard card_src={time_icon} text={`${time} ${time_unit} / ronde`}/>
                 </div>
             
             </div>
