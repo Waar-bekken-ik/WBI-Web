@@ -6,7 +6,10 @@ function ButtonBack({ value }) {
     const { setGamePhase } = useStore();
 
     const bi_style = {
-        height: "8vw",
+         height: "8vw",
+         marginLeft: "10px",
+         marginTop: "15px",
+         
     }
 
     return (

@@ -136,8 +136,6 @@ function Start() {
         fontFamily: "Montserrat",
     }
 
-    console.log(errors.player)
-
     return (
         <div style={bg}>
             <h1 style={header}>

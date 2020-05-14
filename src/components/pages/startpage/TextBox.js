@@ -41,7 +41,6 @@ function TextBox ({text, tb_name, tb_ref}) {
         fontFamily: "Montserrat",
     }
     }
-    
 
     return(
         <input style={code_bar} type="text" 
@@ -51,7 +50,6 @@ function TextBox ({text, tb_name, tb_ref}) {
         placeholder={text}
         />
     )
-
 }
 
 export default TextBox;
