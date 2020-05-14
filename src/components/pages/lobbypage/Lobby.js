@@ -1,8 +1,5 @@
 import React from "react";
-import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
-import {useForm} from "react-hook-form";
-import TextBox from "../startpage/TextBox";
 import user_icon from "../../../images/user.png";
 import arrow_icon from "../../../images/arrows.png";
 import time_icon from "../../../images/interface.png";
@@ -13,15 +10,11 @@ function Lobby() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     const subtitle = "Wachten"
     const subtitle_two = "op de andere spelers..."
-   
-    const {register, handleSubmit} = useForm();
-
-
-
-    const onSubmit = data => {
-        console.log(data);
-        alert(data.name + " heeft " + data.room_pin + " ingevoerd.")
-    }
+    const player_count = 6
+    const player_total = 10
+    const rounds = 1
+    const time = 2
+    const time_unit = "min"
 
     const bg = {
         backgroundColor: "#F5F5F5",
@@ -42,14 +35,6 @@ function Lobby() {
         display: "flex",
         flexDirection: "column",
     };
-
-    const header = {
-        fontSize: "40px",
-        color: "#505050",
-        alignSelf: "center",
-        fontFamily: "Montserrat",
-    };
-    
 
     const nav = {
         display:"flex",
@@ -87,7 +72,7 @@ function Lobby() {
         width: "100%",
     }
 
-    const form = {
+    const info_section = {
         height:"70%",
         width: "80%",
         fontSize: "50px",
@@ -99,18 +84,7 @@ function Lobby() {
         fontFamily: "Montserrat",
     }
 
-
-
-    const hint = {
-        fontSize: "3vw",
-        color: "#0B2073",
-        alignSelf: "center",
-        marginBottom: "10px",
-        display: 'flex',
-        textAlign: 'center',
-        fontFamily: "Montserrat",
-    }
-    const code_bar = {
+    const info_card = {
         fontSize: "20px",
         height:"20%",
         width: "100%",
@@ -132,7 +106,7 @@ function Lobby() {
         height: "70%",
         alignSelf: "center",
         color: "red",
-        marginLeft: "2%",
+        marginLeft: "5%",
     }
 
     const info = {
@@ -146,26 +120,24 @@ function Lobby() {
             <div style={menu}>
                 <div style={sbt_div}>
                     <div style={nav}>
-                        <ButtonBack value="/" />
+                        <ButtonBack value="/start" />
                     </div>
                     <h1 style={sbt}>{subtitle}</h1>
                     <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
-                <div style={form}>
-                    <div style={code_bar}>
+                <div style={info_section}>
+                    <div style={info_card}>
                         <img style={icon} src={user_icon}></img>
-                        <p style={info}>hoi</p>
+                        <p style={info}>{player_count} / {player_total}</p>
                     </div>
-                    <div style={code_bar}>
+                    <div style={info_card}>
                         <img style={icon} src={arrow_icon}></img>
-                        <p style={info}>hoi</p>
+                        <p style={info}>{rounds} ronde(s)</p>
                     </div>
-                    <div style={code_bar}>
+                    <div style={info_card}>
                         <img style={icon} src={time_icon}></img>
-                        <p style={info}>hoi</p>
+                        <p style={info}>{time} {time_unit} / ronde</p>
                     </div>
-                    {/* <TextBox text="Room pin invoeren" tb_ref={register} tb_name="room_pin"/> */}
-                    {/* <ButtonStart name="Doe mee!" /> */}
                 </div>
             
             </div>
