@@ -6,7 +6,6 @@ function Button({ value, name }) {
     const { setGamePhase } = useStore();
 
     const handleClick = () => {
-        setGamePhase('start')
         setClicked(!clicked)
     };
 
@@ -53,6 +52,7 @@ function Button({ value, name }) {
 
     return (
         <button
+            onPointerUp={() => setGamePhase('start')}
             onMouseDown={() => handleClick()}
             onTouchStart={() => handleClick()}
             style={btn}

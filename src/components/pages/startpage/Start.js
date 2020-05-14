@@ -13,7 +13,7 @@ function Start() {
     const subtitle_two = "om aan de sessie deel te nemen"
     const info = "Tip: de code staat op het beeldscherm."
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const { pusher, setPossibleAnswers, setGamePhase, setGame } = useStore();
 
     const onSubmit = values => {
@@ -136,6 +136,7 @@ function Start() {
         fontFamily: "Montserrat",
     }
 
+    console.log(errors.player)
 
     return (
         <div style={bg}>
@@ -152,13 +153,31 @@ function Start() {
                 </div>
 
                 <form style={form} onSubmit={handleSubmit(onSubmit)}>
-                    <TextBox text="Naam invoeren" tb_ref={register} tb_name="player" />
-                    <TextBox text="Room pin invoeren" tb_ref={register} tb_name="pin" />
+                    <TextBox
+                        text="Naam invoeren"
+                        tb_ref={
+                            register({
+                                required: "Verplicht",
+                            })
+                        }
+                        tb_name="player"
+                    />
+                    {errors.player && errors.player.message && <p style={{ color: 'red', fontSize: 10 }}>{errors.player.message}</p>}
+                    <TextBox
+                        text="Room pin invoeren"
+                        tb_ref={
+                            register({
+                                required: "Verplicht",
+                            })
+                        }
+                        tb_name="pin"
+                    />
+                    {errors.pin && errors.pin.message && <p style={{ color: 'red', fontSize: 10 }}>{errors.pin.message}</p>}
                     <ButtonStart name="Doe mee!" />
                 </form>
                 <p style={hint}>{info}</p>
             </div>
-        </div>
+        </div >
     );
 }
 
