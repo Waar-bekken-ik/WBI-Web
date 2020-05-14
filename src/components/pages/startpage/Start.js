@@ -35,7 +35,7 @@ function Start() {
                     console.log(game)
                     const channel = pusher.subscribe(game.pin.toString());
                     channel.bind('game-start', function (data) {
-                        setGamePhase('start')
+                        setGamePhase('game')
                         setPossibleAnswers(data.possibleAnswers)
                     });
                 }
