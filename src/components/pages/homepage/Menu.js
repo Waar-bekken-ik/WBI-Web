@@ -10,10 +10,12 @@ function Menu() {
             backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-evenly",
+            justifyContent: "center",
             borderRadius: "10px",
-            paddingTop: "10px",
-            paddingBottom: "10px",
+            paddingTop:"10px",
+            paddingBottom:"10px",
+            paddingLeft:"20px",
+            paddingRight:"20px",
         }
         return(
             <div style={menu}>

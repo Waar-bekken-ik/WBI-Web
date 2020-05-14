@@ -39,7 +39,7 @@ function Button({value, name}){
             fontSize: "40px",
             borderRadius: "20px",
             border: "none",
-            width: "80%",
+            width: "100%",
             height: "30%",
             margin: "10px",
             alignSelf: "center",

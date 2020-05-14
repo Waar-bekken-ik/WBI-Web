@@ -55,8 +55,6 @@ function Start(){
             width: "100%",
             height: "8vw",
             flexDirection: 'row',
-            marginTop: "-4vh",
-         
         }
 
 
@@ -115,8 +113,6 @@ function Start(){
 
         return(
             <div style={bg}>
-                    <h1 style={header}>
-                    </h1>
                 <div style={menu}>
                     <div style={sbt_div}>
                         <div style={nav}>
