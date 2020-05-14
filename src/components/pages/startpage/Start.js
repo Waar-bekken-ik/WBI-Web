@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
 import {useForm} from "react-hook-form";
 import TextBox from "../startpage/TextBox";
-// https://www.egmadviseurs.nl/public/uploads/Advies-Erasmus-MC-Rotterdam-13.jpg
-
 
 function Start(){
     
@@ -20,7 +18,7 @@ function Start(){
     
         const onSubmit = data => {
             console.log(data);
-            alert(data.name + " heeft " + data.room_id + " ingevoerd.")
+            alert(data.name + " heeft " + data.room_pin + " ingevoerd.")
         }
 
         const bg = {
@@ -130,7 +128,7 @@ function Start(){
 
                     <form style={form} onSubmit={handleSubmit(onSubmit)}>
                         <TextBox text="Naam invoeren" tb_ref={register} tb_name="name"/>
-                        <TextBox text="Room ID" tb_ref={register} tb_name="room_id"/>
+                        <TextBox text="Room pin invoeren" tb_ref={register} tb_name="room_pin"/>
                         <ButtonStart name="Doe mee!" />
                     </form>
                 
@@ -139,6 +137,5 @@ function Start(){
             </div>
         );
 }
-
 
 export default Start;
