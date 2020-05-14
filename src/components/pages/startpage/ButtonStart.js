@@ -1,28 +1,56 @@
-import React from "react";
+import React, {useState} from "react";
 // import {Link } from "react-router-dom";
 
 function ButtonStart({name}) {
+    const [clicked, setClicked] = useState(false);
+    const handleClick = () => {
+        setClicked(!clicked)
+    };
 
-    const lnk = {
-        fontFamily: "Montserrat",
-        fontSize: "30px",
-        borderRadius: "20px",
-        border: "2px #85D1EB solid",
-        width: "100%",
-        height: "40%",
-        margin: "10px",
-        alignSelf: "center",
-        backgroundColor:'#85D1EB',
-        color:'white',
-        textDecoration: 'none',
-        textAlign:'center',
-        paddingLeft:"10px",
-        paddingRight:"10px",
-        marginTop: "20px",
+    var lnk;
+
+    if(clicked) {
+        lnk = {
+            fontFamily: "Montserrat",
+            fontSize: "20px",
+            borderRadius: "10px",
+            border: "2px #314C8C solid",
+            width: "100%",
+            height: "20%",
+            margin: "10px",
+            alignSelf: "center",
+            backgroundColor:'#314C8C',
+            color:'white',
+            textDecoration: 'none',
+            textAlign:'center',
+            paddingLeft:"10px",
+            paddingRight:"10px",
+            marginTop: "20px",
+        }
+    } else {
+        lnk = {
+            fontFamily: "Montserrat",
+            fontSize: "20px",
+            borderRadius: "10px",
+            border: "2px #0C2074 solid",
+            width: "100%",
+            height: "20%",
+            margin: "10px",
+            alignSelf: "center",
+            backgroundColor:'#0C2074',
+            color:'white',
+            textDecoration: 'none',
+            textAlign:'center',
+            paddingLeft:"10px",
+            paddingRight:"10px",
+            marginTop: "20px",
+        }
     }
-
+    
         return(
-            <button style={lnk}>{name}</button>
+            <button style={lnk} onMouseDown = {()=> handleClick()} onTouchStart = {()=> handleClick()}>
+                {name}
+            </button>
         )
 }
 

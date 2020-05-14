@@ -11,7 +11,7 @@ function Menu() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
-            borderRadius: "20px",
+            borderRadius: "10px",
             paddingTop: "10px",
             paddingBottom: "10px",
         }
