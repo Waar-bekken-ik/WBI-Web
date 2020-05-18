@@ -16,6 +16,8 @@ function App() {
       return <Start />
     case 'lobby':
       return <Lobby />
+    case 'screen':
+      return <Game />
     case 'game':
       return <Game />
     default:

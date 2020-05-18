@@ -4,25 +4,24 @@ import user_icon from "../../../images/user.png";
 import arrow_icon from "../../../images/arrows.png";
 import time_icon from "../../../images/interface.png";
 import InfoCard from "../lobbypage/InfoCard";
+import { useStore } from "../../../store";
 
 function Lobby() {
-    
+    const { game } = useStore();
     var vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     const subtitle = "Wachten"
     const subtitle_two = "op de andere spelers..."
     const player_count = 6
     const player_total = 10
-    const rounds = 1
-    const time = 2
-    const time_unit = "min"
+    const time_unit = "sec"
 
     const bg = {
         backgroundColor: "#F5F5F5",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        height:"calc(var(--vh, 1vh)*100)",
+        height: "calc(var(--vh, 1vh)*100)",
         // ^^ for mobile browsers
         display: "flex",
         flexDirection: "column",
@@ -32,17 +31,17 @@ function Lobby() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        height:"100%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
     };
 
     const nav = {
-        display:"flex",
+        display: "flex",
         justifyContent: "flext-start",
         width: "100%",
         height: "8vw",
-        flexDirection: 'row',     
+        flexDirection: 'row',
     }
 
     const sbt = {
@@ -66,25 +65,27 @@ function Lobby() {
     const sbt_div = {
         alignContent: "center",
         alignSelf: "center",
-        display:"flex",
+        display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         width: "100%",
     }
 
     const info_section = {
-        height:"70%",
+        height: "70%",
         width: "80%",
         fontSize: "50px",
         alignSelf: "center",
-        textAlign:"center",
+        textAlign: "center",
         justifyContent: "center",
-        display:"flex",
+        display: "flex",
         flexDirection: "column",
         fontFamily: "Montserrat",
     }
 
-    return(
+    console.log(game)
+
+    return (
         <div style={bg}>
             <div style={menu}>
                 <div style={sbt_div}>
@@ -95,11 +96,11 @@ function Lobby() {
                     <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
                 <div style={info_section}>
-                    <InfoCard card_src={user_icon} text={`${player_count} / ${player_total}`}/>
-                    <InfoCard card_src={arrow_icon} text={`${rounds} ronde(s)`}/>
-                    <InfoCard card_src={time_icon} text={`${time} ${time_unit} / ronde`}/>
+                    <InfoCard card_src={user_icon} text={`${player_count} / ${player_total}`} />
+                    <InfoCard card_src={arrow_icon} text={`${game?.rounds} ronde(s)`} />
+                    <InfoCard card_src={time_icon} text={`${game?.time} ${time_unit} / ronde`} />
                 </div>
-            
+
             </div>
         </div>
     );

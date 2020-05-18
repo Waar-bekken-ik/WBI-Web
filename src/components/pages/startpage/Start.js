@@ -14,10 +14,9 @@ function Start() {
     const info = "Tip: de code staat op het beeldscherm."
 
     const { register, handleSubmit, errors } = useForm();
-    const { pusher, setPossibleAnswers, setGamePhase, setGame } = useStore();
+    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer } = useStore();
 
     const onSubmit = values => {
-        console.log(process.env.REACT_APP_URL)
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
             method: 'POST',
             headers: {
@@ -32,9 +31,12 @@ function Start() {
                 } else {
                     setGamePhase('lobby')
                     setGame(game)
-                    console.log(game)
+                    setPlayer(values.player)
                     const channel = pusher.subscribe(game.pin.toString());
-                    channel.bind('game-start', function (data) {
+                    channel.bind('game-start', function () {
+                        setGamePhase('screen')
+                    });
+                    channel.bind('send-question', function (data) {
                         setGamePhase('game')
                         setPossibleAnswers(data.possibleAnswers)
                     });
