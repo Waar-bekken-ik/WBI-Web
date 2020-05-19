@@ -8,7 +8,7 @@ const Game = () => {
 
     useEffect(() => {
         if (!timer) {
-            if (givenAnswer === undefined) setGivenAnswer('')
+            if (givenAnswer === undefined) setTimer(game.time)
             return;
         }
 
@@ -49,7 +49,7 @@ const Game = () => {
     };
 
     const config = { mass: 5, tension: 2000, friction: 200 }
-
+    console.log(possibleAnswers)
     const trailContainer = useTrail(possibleAnswers.length, {
         config,
         border: 'none',
@@ -66,7 +66,7 @@ const Game = () => {
     })
 
     const props = useSpring({
-        width: `${timer * 10}%`,
+        width: `${timer / game.time * 100}%`,
         height: "20px",
         backgroundColor: '#0C2074'
     })
@@ -94,11 +94,13 @@ const Game = () => {
 const Button = ({ text }) => {
     const [clicked, setClicked] = useState(false)
     const [disabled, setDisabled] = useState(false)
-    const { setGivenAnswer, givenAnswer, game, player } = useStore();
+    const { setGivenAnswer, givenAnswer, game, player, correctAnswer } = useStore();
 
     useEffect(() => {
         if (givenAnswer) setDisabled(true)
     }, [givenAnswer])
+
+    console.log(givenAnswer)
 
     function getWidth() {
         if (givenAnswer === undefined) {
@@ -110,6 +112,16 @@ const Button = ({ text }) => {
         }
     }
 
+    function getBackgroundColor() {
+        if (!correctAnswer) {
+            return "#0C2074"
+        } else if (correctAnswer === givenAnswer) {
+            return '#63c45a'
+        } else {
+            return '#c45a5a'
+        }
+    }
+
     const props = useSpring({
         border: 'none',
         textDecoration: 'none',
@@ -117,7 +129,7 @@ const Button = ({ text }) => {
         justifyContent: 'center',
         width: '80%',
         transform: getWidth(),
-        backgroundColor: "#0C2074",
+        backgroundColor: getBackgroundColor(),
         padding: 20,
         borderRadius: "10px",
         marginBottom: 20,

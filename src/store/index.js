@@ -5,10 +5,11 @@ export const [useStore] = create(set => ({
         cluster: process.env.REACT_APP_CLUSTER,
     }),
     gamePhase: undefined,
-    possibleAnswers: ['okee', 'okee2'],
+    possibleAnswers: [],
     game: undefined,
     givenAnswer: undefined,
     player: undefined,
+    correctAnswer: undefined,
     setPossibleAnswers: array => {
         set({ possibleAnswers: array })
     },
@@ -23,5 +24,8 @@ export const [useStore] = create(set => ({
     },
     setPlayer: player => {
         set({ player: player })
+    },
+    setCorrectAnswer: correctAnswer => {
+        set({ correctAnswer: correctAnswer })
     },
 }))

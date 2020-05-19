@@ -83,8 +83,6 @@ function Lobby() {
         fontFamily: "Montserrat",
     }
 
-    console.log(game)
-
     return (
         <div style={bg}>
             <div style={menu}>
