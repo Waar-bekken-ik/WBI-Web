@@ -14,10 +14,9 @@ function Start() {
     const info = "Tip: de code staat op het beeldscherm."
 
     const { register, handleSubmit, errors } = useForm();
-    const { pusher, setPossibleAnswers, setGamePhase, setGame } = useStore();
+    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer } = useStore();
 
     const onSubmit = values => {
-        console.log(process.env.REACT_APP_URL)
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
             method: 'POST',
             headers: {
@@ -32,11 +31,34 @@ function Start() {
                 } else {
                     setGamePhase('lobby')
                     setGame(game)
-                    console.log(game)
+                    setPlayer(values.player)
                     const channel = pusher.subscribe(game.pin.toString());
-                    channel.bind('game-start', function (data) {
+                    channel.bind('game-start', function () {
+                        setGamePhase('screen')
+                    });
+                    channel.bind('send-question', function (data) {
                         setGamePhase('game')
-                        setPossibleAnswers(data.possibleAnswers)
+                        function shuffle(possibleAnswers) {
+                            var i, j, k;
+                            for (i = possibleAnswers.length - 1; i > 0; i--) {
+                                j = Math.floor(Math.random() * i)
+                                k = possibleAnswers[i]
+                                possibleAnswers[i] = possibleAnswers[j]
+                                possibleAnswers[j] = k
+                            }
+                            return possibleAnswers
+                        }
+                        setPossibleAnswers(shuffle(data.possibleAnswers))
+                    })
+                    channel.bind('send-correct-answer', function (data) {
+                        setCorrectAnswer(data.correctAnswer)
+
+                        setTimeout(() => {
+                            setGamePhase('screen')
+                            setPossibleAnswers([])
+                            setGivenAnswer(undefined)
+                            setCorrectAnswer(undefined)
+                        }, 3000);
                     });
                 }
             })
@@ -136,6 +158,8 @@ function Start() {
         fontFamily: "Montserrat",
     }
 
+    console.log(errors)
+
     return (
         <div style={bg}>
             <h1 style={header}>
@@ -156,21 +180,31 @@ function Start() {
                         tb_ref={
                             register({
                                 required: "Verplicht",
+                                maxLength: 26,
+                                minLength: 2
                             })
                         }
                         tb_name="player"
                     />
                     {errors.player && errors.player.message && <p style={{ color: 'red', fontSize: 10 }}>{errors.player.message}</p>}
+                    {errors.player?.type === "maxLength" && <p style={{ color: 'red', fontSize: 10 }}>maximaal 50 letters</p>}
+                    {errors.player?.type === "minLength" && <p style={{ color: 'red', fontSize: 10 }}>minimaal 2 letters</p>}
+
                     <TextBox
                         text="Room pin invoeren"
                         tb_ref={
                             register({
                                 required: "Verplicht",
+                                maxLength: 4,
+                                minLength: 3
                             })
                         }
                         tb_name="pin"
                     />
                     {errors.pin && errors.pin.message && <p style={{ color: 'red', fontSize: 10 }}>{errors.pin.message}</p>}
+                    {errors.pin?.type === "maxLength" && <p style={{ color: 'red', fontSize: 10 }}> geen 4 cijferige code</p>}
+                    {errors.pin?.type === "minLength" && <p style={{ color: 'red', fontSize: 10 }}> geen 4 cijferige code</p>}
+
                     <ButtonStart name="Doe mee!" />
                 </form>
                 <p style={hint}>{info}</p>

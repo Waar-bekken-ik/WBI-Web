@@ -1,21 +1,21 @@
 import React from "react";
 
-function InfoCard({card_src, text})  {
+function InfoCard({ card_src, text }) {
 
     const info_card = {
         fontSize: "20px",
-        height:"20%",
+        height: "20%",
         width: "100%",
         border: "2px solid #CECECE",
         borderRadius: "10px",
         color: "#0B2073",
         alignSelf: "center",
-        paddingLeft:"0px",
-        paddingRight:"0px",
-        textAlign:"center",
-        margin:"10px",
+        paddingLeft: "0px",
+        paddingRight: "0px",
+        textAlign: "center",
+        margin: "10px",
         fontFamily: "Montserrat",
-        display:"flex",
+        display: "flex",
         justifyContent: "flex-start",
         backgroundColor: "white",
     }
@@ -33,11 +33,11 @@ function InfoCard({card_src, text})  {
         marginLeft: "5%",
     }
 
-    return(
+    return (
         <div style={info_card}>
-        <img style={icon} src={card_src}></img>
-        <p style={info}>{text}</p>
-    </div>
+            <img alt='infocard' style={icon} src={card_src}></img>
+            <p style={info}>{text}</p>
+        </div>
     )
 }
 
