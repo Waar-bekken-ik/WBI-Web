@@ -1,6 +1,5 @@
 import React from "react";
 import ButtonBack from '../../navigation/ButtonBack';
-import user_icon from "../../../images/user.png";
 import arrow_icon from "../../../images/arrows.png";
 import time_icon from "../../../images/interface.png";
 import InfoCard from "../lobbypage/InfoCard";
@@ -12,8 +11,6 @@ function Lobby() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     const subtitle = "Wachten"
     const subtitle_two = "op de andere spelers..."
-    const player_count = 6
-    const player_total = 10
     const time_unit = "sec"
 
     const bg = {
@@ -94,7 +91,6 @@ function Lobby() {
                     <h2 style={sbt_two}>{subtitle_two}</h2>
                 </div>
                 <div style={info_section}>
-                    <InfoCard card_src={user_icon} text={`${player_count} / ${player_total}`} />
                     <InfoCard card_src={arrow_icon} text={`${game?.rounds} ronde(s)`} />
                     <InfoCard card_src={time_icon} text={`${game?.time} ${time_unit} / ronde`} />
                 </div>
