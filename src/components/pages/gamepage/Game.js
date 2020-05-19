@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useStore } from '../../../store';
 import { useTrail, a, useSpring } from 'react-spring';
+import PauseCard from '../gamepage/PauseCard';
 
 const Game = () => {
     const { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer } = useStore();
@@ -74,7 +75,7 @@ const Game = () => {
     return (
         <div style={bg}>
             {gamePhase === 'screen' ?
-                <h1 style={header}>Kijk naar het scherm</h1>
+                <PauseCard/>
                 :
                 <>
                     <a.div style={props}></a.div>
