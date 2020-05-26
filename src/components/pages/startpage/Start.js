@@ -11,7 +11,7 @@ function Start() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     const subtitle = "Voer de code in"
     const subtitle_two = "om aan de sessie deel te nemen"
-    const info = "Tip: de code staat op het beeldscherm."
+    const info = "Tip: de code staat op het grote scherm."
 
     const { register, handleSubmit, errors } = useForm();
     const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer } = useStore();
