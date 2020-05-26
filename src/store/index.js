@@ -4,12 +4,13 @@ export const [useStore] = create(set => ({
     pusher: new Pusher(process.env.REACT_APP_PUSHER, {
         cluster: process.env.REACT_APP_CLUSTER,
     }),
-    gamePhase: "screen",
+    gamePhase: undefined,
     possibleAnswers: [],
     game: undefined,
     givenAnswer: undefined,
     player: undefined,
     correctAnswer: undefined,
+    score: 0,
     setPossibleAnswers: array => {
         set({ possibleAnswers: array })
     },
@@ -27,6 +28,9 @@ export const [useStore] = create(set => ({
     },
     setCorrectAnswer: correctAnswer => {
         set({ correctAnswer: correctAnswer })
+    },
+    setScore: score => {
+        set({ score: score })
     },
     game: {
         closed: false,

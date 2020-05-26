@@ -4,13 +4,23 @@ import { useTrail, a, useSpring } from 'react-spring';
 import PauseCard from '../gamepage/PauseCard';
 
 const Game = () => {
-    const { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer } = useStore();
+    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer } = useStore();
     const [timer, setTimer] = useState(game.time)
 
     useEffect(() => {
         if (!timer) {
-            if (givenAnswer === undefined) setTimer(game.time)
+            setScore(score += 0)
+            setTimer(game.time)
             return;
+        }
+
+        if(givenAnswer && !correctAnswer) return;
+        else if(givenAnswer && givenAnswer === correctAnswer) {
+            console.log(timer)
+            setScore(score += timer * 10)
+            setTimer(game.time)
+            console.log(score)
+            return
         }
 
         const intervalId = setInterval(() => {
@@ -50,7 +60,6 @@ const Game = () => {
     };
 
     const config = { mass: 5, tension: 2000, friction: 200 }
-    console.log(possibleAnswers)
     const trailContainer = useTrail(possibleAnswers.length, {
         config,
         border: 'none',
@@ -100,8 +109,6 @@ const Button = ({ text }) => {
     useEffect(() => {
         if (givenAnswer) setDisabled(true)
     }, [givenAnswer])
-
-    console.log(givenAnswer)
 
     function getWidth() {
         if (givenAnswer === undefined) {
