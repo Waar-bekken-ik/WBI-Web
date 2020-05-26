@@ -4,6 +4,7 @@ import ButtonBack from '../../navigation/ButtonBack';
 import { useForm } from "react-hook-form";
 import TextBox from "../startpage/TextBox";
 import { useStore } from "../../../store";
+import shallow from 'zustand/shallow'
 
 function Start() {
     const [error, setError] = useState(undefined);
@@ -14,7 +15,10 @@ function Start() {
     const info = "Tip: de code staat op het grote scherm."
 
     const { register, handleSubmit, errors } = useForm();
-    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer } = useStore();
+    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer, setScoreCounted } = useStore();
+    const { timer, setTimer, givenAnswer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer, givenAnswer: state.givenAnswer }), shallow)
+
+    console.log(givenAnswer);
 
     const onSubmit = values => {
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
@@ -52,10 +56,12 @@ function Start() {
                     })
                     channel.bind('send-correct-answer', function (data) {
                         setCorrectAnswer(data.correctAnswer)
+                        setTimer(game.time)
 
                         setTimeout(() => {
-                            setGamePhase('screen')
                             setPossibleAnswers([])
+                            setScoreCounted(false)
+                            setGamePhase('screen')
                             setGivenAnswer(undefined)
                             setCorrectAnswer(undefined)
                         }, 3000);
@@ -157,8 +163,6 @@ function Start() {
         textAlign: 'center',
         fontFamily: "Montserrat",
     }
-
-    console.log(errors)
 
     return (
         <div style={bg}>

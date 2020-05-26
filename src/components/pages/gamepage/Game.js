@@ -2,24 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { useStore } from '../../../store';
 import { useTrail, a, useSpring } from 'react-spring';
 import PauseCard from '../gamepage/PauseCard';
+import shallow from 'zustand/shallow'
 
 const Game = () => {
-    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer } = useStore();
-    const [timer, setTimer] = useState(game.time)
+    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted } = useStore();
+    const { timer, setTimer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer }), shallow)
+
 
     useEffect(() => {
+        if (!possibleAnswers.length) {
+            return
+        }
+
         if (!timer) {
             setScore(score += 0)
             setTimer(game.time)
             return;
         }
 
-        if(givenAnswer && !correctAnswer) return;
-        else if(givenAnswer && givenAnswer === correctAnswer) {
-            console.log(timer)
-            setScore(score += timer * 10)
-            setTimer(game.time)
-            console.log(score)
+        if (givenAnswer && !correctAnswer) return;
+        else if (givenAnswer && givenAnswer === correctAnswer) {
+            if (!scoreCounted) {
+                setScore(score += (timer * 10))
+                setScoreCounted(true)
+            }
             return
         }
 
@@ -29,7 +35,7 @@ const Game = () => {
 
         return () => clearInterval(intervalId);
 
-    }, [timer, setGivenAnswer, givenAnswer]);
+    }, [timer, setGivenAnswer, givenAnswer, correctAnswer, possibleAnswers, setPossibleAnswers]);
 
     const bg = {
         backgroundColor: "#F5F5F5",
@@ -84,7 +90,7 @@ const Game = () => {
     return (
         <div style={bg}>
             {gamePhase === 'screen' ?
-                <PauseCard/>
+                <PauseCard />
                 :
                 <>
                     <a.div style={props}></a.div>

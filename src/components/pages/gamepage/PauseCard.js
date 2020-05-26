@@ -26,9 +26,9 @@ const icon = {
 
 
 function PauseCard() {
-    return(
+    return (
         <div style={title}>
-            <img style={icon} src={desktop_icon}></img>
+            <img alt='icon' style={icon} src={desktop_icon}></img>
             <h1 style={header}>Kijk nu naar het bekken op het grote scherm!</h1>
         </div>
     );
