@@ -24,7 +24,6 @@ const icon = {
     alignSelf: "center",
 }
 
-
 function PauseCard() {
     return (
         <div style={title}>

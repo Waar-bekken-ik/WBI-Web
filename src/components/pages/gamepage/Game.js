@@ -1,13 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useStore } from '../../../store';
 import { useTrail, a, useSpring } from 'react-spring';
 import PauseCard from '../gamepage/PauseCard';
 import shallow from 'zustand/shallow'
 
 const Game = () => {
-    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted } = useStore();
+    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted, player } = useStore();
     const { timer, setTimer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer }), shallow)
 
+    const sendScore = useCallback(() => {
+        fetch(`http://${process.env.REACT_APP_URL}:8000/games/sendscore`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                player: player,
+                score: score,
+                pin: game.pin
+            })
+        })
+    }, [game, player, score])
+
+    useEffect(() => {
+        if (gamePhase === 'highscore') sendScore()
+    }, [gamePhase, sendScore])
 
     useEffect(() => {
         if (!possibleAnswers.length) {
@@ -87,12 +105,12 @@ const Game = () => {
         backgroundColor: '#0C2074'
     })
 
-    return (
-        <div style={bg}>
-            {gamePhase === 'screen' ?
-                <PauseCard />
-                :
-                <>
+    function getGameScreen(gamePhase) {
+        switch (gamePhase) {
+            case 'screen':
+                return <PauseCard />
+            case 'game':
+                return <>
                     <a.div style={props}></a.div>
                     <p style={seconds}>{timer}</p>
                     <p style={header}>Geef het juiste antwoord</p>
@@ -102,7 +120,19 @@ const Game = () => {
                         </a.div>
                     ))}
                 </>
-            }
+            case 'highscore':
+                return <>
+                    <p style={header}>Jouw score:</p>
+                    <p style={header}>{score}</p>
+                </>
+            default:
+                break;
+        }
+    }
+
+    return (
+        <div style={bg}>
+            {getGameScreen(gamePhase)}
         </div >
     )
 }

@@ -16,9 +16,7 @@ function Start() {
 
     const { register, handleSubmit, errors } = useForm();
     const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer, setScoreCounted } = useStore();
-    const { timer, setTimer, givenAnswer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer, givenAnswer: state.givenAnswer }), shallow)
-
-    console.log(givenAnswer);
+    const { setTimer } = useStore(state => ({ setTimer: state.setTimer }), shallow)
 
     const onSubmit = values => {
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
@@ -29,7 +27,7 @@ function Start() {
             },
             body: JSON.stringify(values)
         }).then(res => res.json())
-            .then(game => {
+            .then((game) => {
                 if (game.err) {
                     setError(game.err)
                 } else {
@@ -59,9 +57,13 @@ function Start() {
                         setTimer(game.time)
 
                         setTimeout(() => {
+                            if (data.lastQuestion) {
+                                setGamePhase('highscore')
+                            } else {
+                                setGamePhase('screen')
+                            }
                             setPossibleAnswers([])
                             setScoreCounted(false)
-                            setGamePhase('screen')
                             setGivenAnswer(undefined)
                             setCorrectAnswer(undefined)
                         }, 3000);
