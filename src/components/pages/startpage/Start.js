@@ -4,6 +4,7 @@ import ButtonBack from '../../navigation/ButtonBack';
 import { useForm } from "react-hook-form";
 import TextBox from "../startpage/TextBox";
 import { useStore } from "../../../store";
+import shallow from 'zustand/shallow'
 
 function Start() {
     const [error, setError] = useState(undefined);
@@ -14,7 +15,8 @@ function Start() {
     const info = "Tip: de code staat op het grote scherm."
 
     const { register, handleSubmit, errors } = useForm();
-    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer } = useStore();
+    const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer, setScoreCounted } = useStore();
+    const { setTimer } = useStore(state => ({ setTimer: state.setTimer }), shallow)
 
     const onSubmit = values => {
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
@@ -25,7 +27,7 @@ function Start() {
             },
             body: JSON.stringify(values)
         }).then(res => res.json())
-            .then(game => {
+            .then((game) => {
                 if (game.err) {
                     setError(game.err)
                 } else {
@@ -52,10 +54,16 @@ function Start() {
                     })
                     channel.bind('send-correct-answer', function (data) {
                         setCorrectAnswer(data.correctAnswer)
+                        setTimer(game.time)
 
                         setTimeout(() => {
-                            setGamePhase('screen')
+                            if (data.lastQuestion) {
+                                setGamePhase('highscore')
+                            } else {
+                                setGamePhase('screen')
+                            }
                             setPossibleAnswers([])
+                            setScoreCounted(false)
                             setGivenAnswer(undefined)
                             setCorrectAnswer(undefined)
                         }, 3000);
@@ -157,8 +165,6 @@ function Start() {
         textAlign: 'center',
         fontFamily: "Montserrat",
     }
-
-    console.log(errors)
 
     return (
         <div style={bg}>

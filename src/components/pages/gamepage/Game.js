@@ -1,16 +1,50 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useStore } from '../../../store';
 import { useTrail, a, useSpring } from 'react-spring';
 import PauseCard from '../gamepage/PauseCard';
+import shallow from 'zustand/shallow'
 
 const Game = () => {
-    const { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer } = useStore();
-    const [timer, setTimer] = useState(game.time)
+    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted, player } = useStore();
+    const { timer, setTimer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer }), shallow)
+
+    const sendScore = useCallback(() => {
+        fetch(`http://${process.env.REACT_APP_URL}:8000/games/sendscore`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                player: player,
+                score: score,
+                pin: game.pin
+            })
+        })
+    }, [game, player, score])
 
     useEffect(() => {
+        if (gamePhase === 'highscore') sendScore()
+    }, [gamePhase, sendScore])
+
+    useEffect(() => {
+        if (!possibleAnswers.length) {
+            return
+        }
+
         if (!timer) {
-            if (givenAnswer === undefined) setTimer(game.time)
+            setScore(score += 0)
+            setTimer(game.time)
             return;
+        }
+
+        if (givenAnswer && !correctAnswer) return;
+        else if (givenAnswer && givenAnswer === correctAnswer) {
+            if (!scoreCounted) {
+                setScore(score += (timer * 10))
+                setScoreCounted(true)
+            }
+            return
         }
 
         const intervalId = setInterval(() => {
@@ -19,7 +53,7 @@ const Game = () => {
 
         return () => clearInterval(intervalId);
 
-    }, [timer, setGivenAnswer, givenAnswer]);
+    }, [timer, setGivenAnswer, givenAnswer, correctAnswer, possibleAnswers, setPossibleAnswers]);
 
     const bg = {
         backgroundColor: "#F5F5F5",
@@ -50,7 +84,6 @@ const Game = () => {
     };
 
     const config = { mass: 5, tension: 2000, friction: 200 }
-    console.log(possibleAnswers)
     const trailContainer = useTrail(possibleAnswers.length, {
         config,
         border: 'none',
@@ -72,12 +105,12 @@ const Game = () => {
         backgroundColor: '#0C2074'
     })
 
-    return (
-        <div style={bg}>
-            {gamePhase === 'screen' ?
-                <PauseCard/>
-                :
-                <>
+    function getGameScreen(gamePhase) {
+        switch (gamePhase) {
+            case 'screen':
+                return <PauseCard />
+            case 'game':
+                return <>
                     <a.div style={props}></a.div>
                     <p style={seconds}>{timer}</p>
                     <p style={header}>Geef het juiste antwoord</p>
@@ -87,7 +120,19 @@ const Game = () => {
                         </a.div>
                     ))}
                 </>
-            }
+            case 'highscore':
+                return <>
+                    <p style={header}>Jouw score:</p>
+                    <p style={header}>{score}</p>
+                </>
+            default:
+                break;
+        }
+    }
+
+    return (
+        <div style={bg}>
+            {getGameScreen(gamePhase)}
         </div >
     )
 }
@@ -100,8 +145,6 @@ const Button = ({ text }) => {
     useEffect(() => {
         if (givenAnswer) setDisabled(true)
     }, [givenAnswer])
-
-    console.log(givenAnswer)
 
     function getWidth() {
         if (givenAnswer === undefined) {
