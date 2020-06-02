@@ -111,8 +111,8 @@ const Game = () => {
                 return <PauseCard />
             case 'game':
                 return <>
-                    <a.div style={props}></a.div>
-                    <p style={seconds}>{timer}</p>
+                    {/* <a.div style={props}></a.div>
+                    <p style={seconds}>{timer}</p> */}
                     <p style={header}>Geef het juiste antwoord</p>
                     {trailContainer.map(({ x, height, ...rest }, index) => (
                         <a.div style={{ ...rest, transform: x.interpolate(x => `translate3d(0,${x}px,0)`) }} >
