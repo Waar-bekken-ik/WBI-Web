@@ -5,7 +5,7 @@ import PauseCard from '../gamepage/PauseCard';
 import shallow from 'zustand/shallow'
 
 const Game = () => {
-    let { possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted, player } = useStore();
+    let { setGamePhase, possibleAnswers, gamePhase, game, setGivenAnswer, givenAnswer, setScore, score, correctAnswer, setPossibleAnswers, scoreCounted, setScoreCounted, player } = useStore();
     const { timer, setTimer } = useStore(state => ({ timer: state.timer, setTimer: state.setTimer }), shallow)
 
     const sendScore = useCallback(() => {
@@ -122,8 +122,26 @@ const Game = () => {
                 </>
             case 'highscore':
                 return <>
-                    <p style={header}>Jouw score:</p>
+                    <p style={{
+                        marginBottom: 20,
+                        fontSize: "6vw",
+                        color: "#505050",
+                        fontWeight: 900,
+                        alignSelf: "center",
+                        fontFamily: "Montserrat",
+                    }}>Jouw score:</p>
                     <p style={header}>{score}</p>
+
+                    <p onClick={() => {
+                        setGamePhase(undefined)
+                        setScore(0)
+                    }} style={{
+                        color: "#0C2074",
+                        fontSize: "6vw",
+                        fontWeight: 900,
+                        alignSelf: "center",
+                        fontFamily: "Montserrat",
+                    }}>Naar het startscherm</p>
                 </>
             default:
                 break;
