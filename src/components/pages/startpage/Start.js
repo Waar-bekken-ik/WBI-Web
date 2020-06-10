@@ -19,23 +19,24 @@ function Start() {
     const { setTimer } = useStore(state => ({ setTimer: state.setTimer }), shallow)
 
     const checkBadwords = (value) => {
-        if (value.includes("kanker")) return false
-        if (value.includes("nigger")) return false
-        if (value.includes("kut")) return false
-        if (value.includes("hoer")) return false
-        if (value.includes("neger")) return false
-        if (value.includes("adolf")) return false
-        if (value.includes("joden")) return false
-        if (value.includes("nazi")) return false
-        if (value.includes("hitler")) return false
-        if (value.includes("jood")) return false
-        if (value.includes("george")) return false
-        if (value.includes("piemel")) return false
-        if (value.includes("penis")) return false
-        if (value.includes("pik")) return false
-        if (value.includes("tering")) return false
-        if (value.includes("corona")) return false
-        if (value.includes("covid")) return false
+        const name = value.toLowerCase()
+        if (name.includes("kanker")) return false
+        if (name.includes("nigger")) return false
+        if (name.includes("kut")) return false
+        if (name.includes("hoer")) return false
+        if (name.includes("neger")) return false
+        if (name.includes("adolf")) return false
+        if (name.includes("joden")) return false
+        if (name.includes("nazi")) return false
+        if (name.includes("hitler")) return false
+        if (name.includes("jood")) return false
+        if (name.includes("george")) return false
+        if (name.includes("piemel")) return false
+        if (name.includes("penis")) return false
+        if (name.includes("pik")) return false
+        if (name.includes("tering")) return false
+        if (name.includes("corona")) return false
+        if (name.includes("covid")) return false
         else return true
     }
 
