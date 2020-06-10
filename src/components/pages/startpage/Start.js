@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonStart from '../startpage/ButtonStart';
 import ButtonBack from '../../navigation/ButtonBack';
 import { useForm } from "react-hook-form";
@@ -17,6 +17,27 @@ function Start() {
     const { register, handleSubmit, errors } = useForm();
     const { pusher, setPossibleAnswers, setGamePhase, setGame, setPlayer, setCorrectAnswer, setGivenAnswer, setScoreCounted } = useStore();
     const { setTimer } = useStore(state => ({ setTimer: state.setTimer }), shallow)
+
+    const checkBadwords = (value) => {
+        if (value.includes("kanker")) return false
+        if (value.includes("nigger")) return false
+        if (value.includes("kut")) return false
+        if (value.includes("hoer")) return false
+        if (value.includes("neger")) return false
+        if (value.includes("adolf")) return false
+        if (value.includes("joden")) return false
+        if (value.includes("nazi")) return false
+        if (value.includes("hitler")) return false
+        if (value.includes("jood")) return false
+        if (value.includes("george")) return false
+        if (value.includes("piemel")) return false
+        if (value.includes("penis")) return false
+        if (value.includes("pik")) return false
+        if (value.includes("tering")) return false
+        if (value.includes("corona")) return false
+        if (value.includes("covid")) return false
+        else return true
+    }
 
     const onSubmit = values => {
         fetch(`http://${process.env.REACT_APP_URL}:8000/games/joingame`, {
@@ -165,6 +186,7 @@ function Start() {
         textAlign: 'center',
         fontFamily: "Montserrat",
     }
+    console.log(errors.player)
 
     return (
         <div style={bg}>
@@ -187,7 +209,8 @@ function Start() {
                             register({
                                 required: "Verplicht",
                                 maxLength: 26,
-                                minLength: 2
+                                minLength: 2,
+                                validate: checkBadwords
                             })
                         }
                         tb_name="player"
@@ -195,7 +218,7 @@ function Start() {
                     {errors.player && errors.player.message && <p style={{ color: 'red', fontSize: 10 }}>{errors.player.message}</p>}
                     {errors.player?.type === "maxLength" && <p style={{ color: 'red', fontSize: 10 }}>maximaal 50 letters</p>}
                     {errors.player?.type === "minLength" && <p style={{ color: 'red', fontSize: 10 }}>minimaal 2 letters</p>}
-
+                    {errors.player?.type === "validate" && <p style={{ color: 'red', fontSize: 10 }}>Dit woord is niet gepast</p>}
                     <TextBox
                         text="Room pin invoeren"
                         tb_ref={
@@ -218,5 +241,6 @@ function Start() {
         </div >
     );
 }
+
 
 export default Start;

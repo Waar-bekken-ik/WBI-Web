@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Menu from './Menu';
 import logo from '../../../images/logo_erasmusmc.png';
 import background from '../../../images/background.png';
@@ -47,17 +47,51 @@ function Home() {
         borderRadius: "10px",
     }
 
+    const size = useWindowSize()
+    console.log(size)
+
     return (
-        <div style={bg}>
-            <img alt="Logo" style={logostl} src={logo} />
-            <div style={menu}>
-                <h1 style={header}>
-                    {title}
-                </h1>
-                <Menu />
+        size.width <= 980 ?
+            <div style={bg}>
+                <img alt="Logo" style={logostl} src={logo} />
+                <div style={menu}>
+                    <h1 style={header}>
+                        {title}
+                    </h1>
+                    <Menu />
+                </div>
             </div>
-        </div>
+            :
+            <h1 style={{ textAlign: 'center' }}>Deze site is helaas alleen beschikbaar op mobiele apparaten</h1>
     );
+}
+
+function useWindowSize() {
+    const isClient = typeof window === 'object';
+
+    function getSize() {
+        return {
+            width: isClient ? window.innerWidth : undefined,
+            height: isClient ? window.innerHeight : undefined
+        };
+    }
+
+    const [windowSize, setWindowSize] = useState(getSize);
+
+    useEffect(() => {
+        if (!isClient) {
+            return false;
+        }
+
+        function handleResize() {
+            setWindowSize(getSize());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+    return windowSize;
 }
 
 export default Home;
